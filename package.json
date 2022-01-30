@@ -3,6 +3,7 @@
     "dotenv": "^14.3.2",
     "node-telegram-bot-api": "^0.56.0",
     "puppeteer": "^13.1.2",
-    "puppeteer-core": "^13.1.2"
+    "puppeteer-core": "^13.1.2",
+    "simple-node-logger": "^21.8.12"
   }
 }
