@@ -1,5 +1,6 @@
 // TODO: catch error
 const puppeteer = require('puppeteer');
+// const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 
 // CAUTION if true this will purchase tickets
@@ -50,6 +51,7 @@ async function bookTicket(bot, chatId) {
 
 
     const browser = await puppeteer.launch({
+      // executablePath: '/usr/bin/chromium-browser',
       headless: runInHeadlessMode,
       args: [
         '--incognito',
