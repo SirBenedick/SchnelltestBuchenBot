@@ -3,7 +3,7 @@ const puppeteer = require('puppeteer');
 // const puppeteer = require('puppeteer-core');
 const fs = require('fs');
 const d = new Date();
-const date = d.getHours() + "-" + d.getMinutes()
+const date = d.getMonth() + "-" +d.getDay() + "-" + d.getHours() + "-" + d.getMinutes()
 const log = require('simple-node-logger').createSimpleFileLogger(date + '.log');
 
 // CAUTION if true this will purchase tickets

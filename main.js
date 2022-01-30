@@ -1,7 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const { bookTicket } = require("./booking_gewandhaus");
 const d = new Date();
-const date = d.getHours() + "-" + d.getMinutes()
+const date = d.getMonth() + "-" +d.getDay() + "-" + d.getHours() + "-" + d.getMinutes()
 const log = require('simple-node-logger').createSimpleFileLogger(date + '.log');
 require('dotenv').config()
 log.info("Starting booking bot")
