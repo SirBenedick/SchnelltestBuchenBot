@@ -2,6 +2,9 @@
 const puppeteer = require('puppeteer');
 // const puppeteer = require('puppeteer-core');
 const fs = require('fs');
+const d = new Date();
+const date = d.getHours() + "-" + d.getMinutes()
+const log = require('simple-node-logger').createSimpleFileLogger(date + '.log');
 
 // CAUTION if true this will purchase tickets
 const isInProductionMode = true
@@ -30,7 +33,7 @@ if (!fs.existsSync(dir)) {
 var logNumber = 1
 async function screenshot(runNumber, page) {
   if (shouldCaptureScreenshots) {
-    console.log(logNumber)
+    log.debug(logNumber)
     await page.screenshot({ path: dir + '/' + runNumber + '_' + logNumber + '.png' });
     logNumber++;
   }
@@ -43,10 +46,9 @@ function sendTelegramMessage(chatId, bot, msg) {
 
 async function bookTicket(bot, chatId) {
   try {
-
     const d = new Date();
     const runNumber = d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds()
-    console.log("Starting: " + runNumber)
+    log.info(chatId + " - bookingTicket - " + runNumber)
     sendTelegramMessage(chatId, bot, "[1/4] 🛫 Buchungsprozess wird gestartet...");
 
 
@@ -523,10 +525,11 @@ async function bookTicket(bot, chatId) {
 
     sendTelegramMessage(chatId, bot, "[4/4] 🥳 Ticket erstellt. Kommt sofort 🚀");
     sendTelegramMessage(chatId, bot, urlToPDF);
+    log.info(chatId + ": Buchen erfolgreich beendet")
   }
-  catch (e){
-    console.log(chatId + ": Buchen abgestürzt :(")
-    console.log(e)
+  catch (e) {
+    log.info(chatId + ": Buchen abgestürzt :(")
+    log.info(e)
     sendTelegramMessage(chatId, bot, "⚠️ Leider ist der Vorgang abgebrochen 😢");
     sendTelegramMessage(chatId, bot, "Probier ist einfach nochmal 🙆‍♂️");
   }
